@@ -1,6 +1,8 @@
 # IG-Sistema_Solar
 Modelo 3D interactivo del Sistema Solar
+
 **ENLACE AL CÓDIGO**: [https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg](https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg)
+
 **ENLACE AL MODELO 3D**: [https://jjfqyg.csb.app/](https://jjfqyg.csb.app/)
 
 ## Variables globales
