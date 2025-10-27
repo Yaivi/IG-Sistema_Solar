@@ -2,7 +2,18 @@
 Modelo 3D interactivo del Sistema Solar
 
 ## Variables globales
-Primero se guarda en un array los datos de los planetas, estos se usan para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. También se crean las variables globales para la camara, los controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
+Primero se guarda en un array los siguientes datos de los planetas con el formato:
+* Nombre
+* Radio
+* Número de segmentos horizontales
+* Número de segmentos verticales
+* Color
+* Distancia
+* Velocidad de movimiento
+* Textura del planeta
+Toda esta información es la que se usará para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. 
+
+También se crean las variables globales para la camara, los controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
 
 ## Funciones para crear objetos
 Dentro del sistema se van a crear 3 tipos de objetos, planetas y estrellas. La diferencia entre estos es el tipo de material y su reacción ante la luz.
