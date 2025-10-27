@@ -1,5 +1,7 @@
 # IG-Sistema_Solar
 Modelo 3D interactivo del Sistema Solar
+**ENLACE AL CÓDIGO**: [https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg](https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg)
+**ENLACE AL MODELO 3D**: [https://jjfqyg.csb.app/](https://jjfqyg.csb.app/)
 
 ## Variables globales
 Primero se guarda en un array los siguientes datos de los planetas con el formato:
@@ -25,3 +27,4 @@ Además de las funciones para crear estos 2 objetos se ha añadido una función 
 ## Controles de cámara
 La cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara y con el ratón para girar. También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara.
 
+## Vídeo
