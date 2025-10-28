@@ -27,6 +27,16 @@ Los planetas usarán Phong para que les afecten las luces y sombras de las lunas
 Además de las funciones para crear estos 2 objetos se ha añadido una función para generar pequeños puntos blancos en el cielo, simulando campo de estrellas lejanas, esto definiendo un espacio, y con aleatoriedad seleccionando coordenadas en las que situar los puntos blancos, siendo estos puntos blancos objetos PointsMaterial.
 
 ## Controles de cámara
-La cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara y con el ratón para girar. También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara.
+La cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara, además se puede usar la tecla R y F para controlar la altura de la cámara, subiendo y bajando esta. Para girar la cámara se puede hacer uso del ratón, haciendo click en la pantalla para rotarla en esa dirección, o usar las teclas Q y E para rotar a la izquierda y derecha respectivamente. 
+
+También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara.
+
+## Modo Editar
+Se ha implementado un modo Editar, en este modo se puede seleccionar cualquiera de los objetos que se han creado y modificar su posición y tamaño a través de las opciones de TransformControls. Para poder seleccionar los objetos de forma interactiva se ha creado una función auxilar que hace uso de rayCasting para detectar el objeto sobre el que se hace click y poder editarlo.
+
+Se le añade al gui una opción para poder agregar nuevos astros, ya sean planetas o lunas.
+
+## Modo Realista
+Este modo cambia la representción del sistema solar a uno que muestre las verdaderas órbitas y tamaños entre los planetas a escala X:X. Se le añade una imagen de fondo de una galaxia.
 
 ## Vídeo
