@@ -15,28 +15,38 @@ Primero se guarda en un array los siguientes datos de los planetas con el format
 * Distancia
 * Velocidad de movimiento
 * Textura del planeta
-Toda esta información es la que se usará para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. 
+Toda esta información es la que se usará para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. Las lunas tendrán un array del mismo formato pero además se le añadirá el nombre del planeta al que se le va a asignar. Además para cada objeto que se cree, se le guardarán varios de estos datos en sus UserData
 
-También se crean las variables globales para la camara, los controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
+También se crean las variables globales para las camaras, los diferentes controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
 
 ## Funciones para crear objetos
-Dentro del sistema se van a crear 3 tipos de objetos, planetas y estrellas. La diferencia entre estos es el tipo de material y su reacción ante la luz.
+Dentro del sistema se van a crear 3 tipos de objetos: planetas, lunas y estrellas. La diferencia entre estos es el tipo de material y su reacción ante la luz, y que tipo de objeto es su padre.
 
-Los planetas usarán Phong para que les afecten las luces y sombras de las lunas, además de crear el planeta en sí se generará su órbita mediante, pero no serán capaces de oscurecer otros planetas, mientras que las estrellas, es decir el Sol, será un BasicMaterial para que la fuente de luz que se encuentra en su misma posición también ilumine la superficie de este simulando que el objeto es el que genera la luz, por último las lunas serán capaces de generar sombras en los planetas que orbitan. A parte de la diferencia de material, la función para generar planetas y lunas viene crear también la órbita que siguen
+Los planetas y las lunas harán uso de una función común, **Esfera()**, ambos usarán como material de su mesh Phong, para que le afecte la luz, con una geometría de esfera, para crearla se le pasam los valores del radio, y el número de segmentos horizontales y verticales. Además de crear el objeto en sí se generará su órbita mediante una línea elíptica de material Basic, para que se vea siempre, haciendo uso de la distancia del planeta respecto al sol y unos valores focales, f1 y f2 que se han puesto para todos los planetas con valor 1. Cuando se cree el objeto o la órbita se revisa si el objeto que se ha pasado como padre es un Mesh, para ver si el objeto al que se va a añadir es un planeta y por tanto se está creando una luna, o si por el contrario se está agregando un planeta nuevo a la escena.
 
-Además de las funciones para crear estos 2 objetos se ha añadido una función para generar pequeños puntos blancos en el cielo, simulando campo de estrellas lejanas, esto definiendo un espacio, y con aleatoriedad seleccionando coordenadas en las que situar los puntos blancos, siendo estos puntos blancos objetos PointsMaterial.
+Mientras las estrellas, se crean usando la función **Estrella()**, en el caso de este trabajo solo el Sol, será un BasicMaterial para que la esfera generada muestre su color pese a que la luz se encuentra dentro de la esfera generada, así logrando que se "ilumine" la superficie simulando que el objeto es el que genera la luz.
+
+Además de las funciones para crear estos 2 objetos se ha añadido una función, **createStarfield()**, para generar pequeños puntos blancos en el cielo, simulando campo de estrellas lejanas, esto definiendo un espacio, y con aleatoriedad seleccionando coordenadas en las que situar los puntos blancos, siendo estos puntos blancos objetos PointsMaterial. 
+
+Otro objeto creado son los **anillos de Saturno**, que se generan usando una geometría de anillo, definiendo la posición del borde interno y del borde exterior. Para que se aplique correctamente la textura se deben coger las coordenadas UV que son las que indican como se debe poner la textura, de base la textura se ve como enrollada alrededor del anillo, no en capas desde el borde interior al exterior. Para solucionarlo tomamos la posición (x, y) de cada vértice (UV), esto nos dice dónde está el vértice dentro del anillo, le calculamos el radio, esto da la distancia desde el centro del anillo hasta ese vértice. A continuación se normaliza el radio y se lo asignamos al UV, de esta forma se le dice de que parte del anillo a que otra parte va la textura.
 
 ## Controles de cámara
-La cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara, además se puede usar la tecla R y F para controlar la altura de la cámara, subiendo y bajando esta. Para girar la cámara se puede hacer uso del ratón, haciendo click en la pantalla para rotarla en esa dirección, o usar las teclas Q y E para rotar a la izquierda y derecha respectivamente. 
+La simulación cuenta con 2 cámaras entre las que se puede alternar en cualquier momento, una estática que permite ver todo el sistema siempre que se use y otra de libre movimiento. Esta cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara, además se puede usar la tecla R y F para controlar la altura de la cámara, subiendo y bajando esta. Para girar la cámara se puede hacer uso del ratón, haciendo click en la pantalla para rotarla en esa dirección, o usar las teclas Q y E para rotar a la izquierda y derecha respectivamente. 
 
-También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara.
+También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara libre se acercará, se quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara libre.
+
+## Loop
+El loop de animación se divide en 3 partes una para cada modo, en el modo Educativo las posiciones de los planetas y las lunas se van actualizando en torno a su órbita. Este loop permite el uso de los flyControls por lo que siempre que se use la cámara Libre se permite el movimiento por este. En el modo Editar se deja el sistema estático, debido al uso de los TransformControls es más sencillo para la edición y el reposicionamiento de los objetos si se quedan quietos.
+
+## Modo Educativo
+Es el modo predeterminado de la simulación, permite observar el sistema solar y sus elementos a través de las cámaras que se han creado. Esta animado con los movimientos de los planetas y sus lunas representados. 
 
 ## Modo Editar
-Se ha implementado un modo Editar, en este modo se puede seleccionar cualquiera de los objetos que se han creado y modificar su posición y tamaño a través de las opciones de TransformControls. Para poder seleccionar los objetos de forma interactiva se ha creado una función auxilar que hace uso de rayCasting para detectar el objeto sobre el que se hace click y poder editarlo.
+Se ha implementado un modo Editar, en este modo se puede seleccionar cualquiera de los objetos que se han creado y modificar su posición y tamaño a través de las opciones de TransformControls. Para poder seleccionar los objetos de forma interactiva se ha creado una función auxilar que hace uso de rayCasting para detectar el objeto sobre el que se hace click, buscarlo en la lista de objetos creados y así poder editarlo. Cuando se cambie la posición del planeta seleccionado y se vuelva al modo Educativo, se recalculan las órbitas del planeta y de las lunas, moviendose todos estos objetos en su nueva posición.
 
-Se le añade al gui una opción para poder agregar nuevos astros, ya sean planetas o lunas.
+Cuando se entra en este modo se desactivan los FlyControls para que no haya conflictos entre estos y los TransformControls cuando se usen.
 
 ## Modo Realista
-Este modo cambia la representción del sistema solar a uno que muestre las verdaderas órbitas y tamaños entre los planetas a escala X:X. Se le añade una imagen de fondo de una galaxia.
+Este modo edita la posición de los planetas y sus órbitas mostrando una más parecida al del sistema solar real, además le añade una imagen al fondo de una galaxia.
 
 ## Vídeo
