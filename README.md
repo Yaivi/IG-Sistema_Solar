@@ -1,11 +1,22 @@
 # IG-Sistema_Solar
-Modelo 3D interactivo del Sistema Solar
+Este proyecto consiste en una simulación 3D interactiva del Sistema Solar desarrollada con Three.js, que permite visualizar los planetas, sus lunas y órbitas, así como explorar el entorno mediante diferentes modos de visualización y edición. El objetivo es ofrecer una herramienta didáctica e interactiva para aprender sobre los movimientos planetarios y la estructura del sistema solar
 
 **ENLACE AL CÓDIGO**: [https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg](https://codesandbox.io/p/sandbox/entrega-s6-s7-jjfqyg)
 
 **ENLACE AL MODELO 3D**: [https://jjfqyg.csb.app/](https://jjfqyg.csb.app/)
 
-## Variables globales
+## **Índice**   
+1. [Variables globales] (#id1)
+2. [Funciones para crear objetos] (#id2)
+3. [Controles de cámara] (#id3)
+4. [Loop] (#id4)
+5. [Modo Educativo] (#id5)
+6. [Modo Edición] (#id6]
+7. [Modo Realista] (#id7)
+8. [Vídeo] (#id8)
+
+
+## Variables globales <a name="id1"></a>
 Primero se guarda en un array los siguientes datos de los planetas con el formato:
 * Nombre
 * Radio
@@ -19,7 +30,7 @@ Toda esta información es la que se usará para crear las mallas, órbitas, movi
 
 También se crean las variables globales para las camaras, los diferentes controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
 
-## Funciones para crear objetos
+## Funciones para crear objetos <a name="id2"></a>
 Dentro del sistema se van a crear 3 tipos de objetos: planetas, lunas y estrellas. La diferencia entre estos es el tipo de material y su reacción ante la luz, y que tipo de objeto es su padre.
 
 Los planetas y las lunas harán uso de una función común, **Esfera()**, ambos usarán como material de su mesh Phong, para que le afecte la luz, con una geometría de esfera, para crearla se le pasam los valores del radio, y el número de segmentos horizontales y verticales, durante la creación también se especifíca el archivo que se va a usar como textura y el color de la propia esfera. Además de crear el objeto en sí se generará su órbita mediante una línea elíptica de material Basic, para que se vea siempre, haciendo uso de la distancia del planeta respecto al sol y unos valores focales, f1 y f2 que se han puesto para todos los planetas con valor 1. Cuando se cree el objeto o la órbita se revisa si el objeto que se ha pasado como padre es un Mesh, para ver si el objeto al que se va a añadir es un planeta y por tanto se está creando una luna, o si por el contrario se está agregando un planeta nuevo a la escena.
@@ -32,23 +43,23 @@ Otro objeto creado son los **anillos de Saturno**, que se generan usando una geo
 
 Por último para el **Modo Edición**, explicado más adelante, se ha añadido una opción para que el usuario cree objetos de pequeño tamaño que simulen asteroides al activar la opción y hacer click en la pantalla. Pese a reutilizar la función **Esfera()**, estos objetos serán estáticos.
 
-## Controles de cámara
+## Controles de cámara <a name="id3"></a>
 La simulación cuenta con 2 cámaras entre las que se puede alternar en cualquier momento, una estática que permite ver todo el sistema siempre que se use y otra de libre movimiento. Esta cámara se controla con los FlyControls de Three.js, por lo que se puede mover libremente la cámara con las teclas W,A,S,D para mover la posición de la cámara, además se puede usar la tecla R y F para controlar la altura de la cámara, subiendo y bajando esta. Para girar la cámara se puede hacer uso del ratón, haciendo click en la pantalla para rotarla en esa dirección, o usar las teclas Q y E para rotar a la izquierda y derecha respectivamente. 
 
 También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara libre se acercará, se quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara libre.
 
-## Loop
+## Loop <a name="id4"></a>
 El loop de animación se divide en 3 partes una para cada modo, en el modo Educativo las posiciones de los planetas y las lunas se van actualizando en torno a su órbita. Este loop permite el uso de los flyControls por lo que siempre que se use la cámara Libre se permite el movimiento por este. En el modo Editar se deja el sistema estático, debido al uso de los TransformControls es más sencillo para la edición y el reposicionamiento de los objetos si se quedan quietos.
 
-## Modo Educativo
+## Modo Educativo <a name="id5"></a>
 Es el modo predeterminado de la simulación, permite observar el sistema solar y sus elementos a través de las cámaras que se han creado. Esta animado con los movimientos de los planetas y sus lunas representados. 
 
-## Modo Editar
+## Modo Editar <a name="id6"></a>
 Se ha implementado un modo Editar, en este modo se puede seleccionar cualquiera de los objetos que se han creado y modificar su posición y tamaño a través de las opciones de TransformControls. Para poder seleccionar los objetos de forma interactiva se ha creado una función auxilar que hace uso de rayCasting para detectar el objeto sobre el que se hace click, buscarlo en la lista de objetos creados y así poder editarlo. Cuando se cambie la posición del planeta seleccionado y se vuelva al modo Educativo, se recalculan las órbitas del planeta y de las lunas, moviendose todos estos objetos en su nueva posición. Otra opción de este modo es para crear asteroides de pequeño tamaño al habilitar la opción, solo será posible añadirlos en este modo aunque se haga click en el botón en alguno de los otros, estos objetos también se pueden editar su posición con los TransformControls.
 
 Cuando se entra en este modo se desactivan los FlyControls para que no haya conflictos entre estos y los TransformControls cuando se usen.
 
-## Modo Realista
+## Modo Realista <a name="id7"></a>
 Este modo le añade una imagen al fondo de una galaxia.
 
-## Vídeo
+## Vídeo <a name="id8"></a>
