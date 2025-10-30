@@ -15,10 +15,10 @@ Este proyecto consiste en una simulación 3D interactiva del Sistema Solar desar
 7. [Modo Realista](#modo-realista)  
 8. [Vídeo](#vídeo)
 
-
-
 ## Variables globales
-Primero se guarda en un array los siguientes datos de los planetas con el formato:
+Dentro del modelo han hecho falta muchas variables para que todos los sistemas, Objetos 3D, Controles, Texturas y demás elementos pudiesen funcionar sin interferir entre el resto de utilidades del proyecto. Entre de las variables que se han declarado para poder trabajar existen 2 tipos, las individuales y las agrupaciones de datos.
+
+Empezando por las agrupaciones, al empezar se guarda en un array los siguientes datos de los planetas:
 * Nombre
 * Radio
 * Número de segmentos horizontales
@@ -27,9 +27,10 @@ Primero se guarda en un array los siguientes datos de los planetas con el format
 * Distancia
 * Velocidad de movimiento
 * Textura del planeta
-Toda esta información es la que se usará para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. Las lunas tendrán un array del mismo formato pero además se le añadirá el nombre del planeta al que se le va a asignar. Además para cada objeto que se cree, se le guardarán varios de estos datos en sus UserData
 
-También se crean las variables globales para las camaras, los diferentes controles, el renderer, el textureLoader, y otra para guardar los objetos como el Sol, cada planeta o luna cuando se creen en 3D.
+Toda esta información es la que se usará para crear las mallas, órbitas, movimientos, objetos 3D y aplicarles las texturas. Las lunas también tienen un array del mismo formato pero además se le añadirá el nombre del planeta al que se le va a asignar. Además para cada objeto que se cree, se le guardarán varios de estos datos en sus UserData
+
+Las variables individuales son en su mayoría para iniciar o guardar objetos como las camaras, los diferentes controles, el renderer, el textureLoader, arrays para guardar los objetos como el Sol, cada planeta o luna al crearlos, y otras variables booleanas para poder cambiar entre modos e impedir el uso de alguna de las opciones a no ser que se cumplan ciertas condiciones.
 
 ## Funciones para crear objetos
 Dentro del sistema se van a crear 3 tipos de objetos: planetas, lunas y estrellas. La diferencia entre estos es el tipo de material y su reacción ante la luz, y que tipo de objeto es su padre.
@@ -50,7 +51,7 @@ La simulación cuenta con 2 cámaras entre las que se puede alternar en cualquie
 También se ha añadido la opción de un menú en el que se selecciona un planeta al que la cámara libre se acercará, se quedará fijada y lo seguirá mientras este se mueva por el sistema solar. Cuando se haga esta selección no se podrá mover libremente la cámara por el sistema hasta deseleccionar el planeta, pero si que se podrá alejar la cámara y ver la ruta desde más lejos. En caso de que se quiera volver a la posición original hay un botón que resetea la posición actual de la cámara libre.
 
 ## Loop
-El loop de animación se divide en 3 partes una para cada modo, en el modo Educativo las posiciones de los planetas y las lunas se van actualizando en torno a su órbita. Este loop permite el uso de los flyControls por lo que siempre que se use la cámara Libre se permite el movimiento por este. En el modo Editar se deja el sistema estático, debido al uso de los TransformControls es más sencillo para la edición y el reposicionamiento de los objetos si se quedan quietos.
+El loop de animación se divide en 3 partes, una para cada modo, en el modo Educativo y el Realista las posiciones de los planetas y las lunas se van actualizando en torno a su órbita. Este loop permite el uso de los flyControls por lo que siempre que se use la cámara Libre se permite el movimiento por este. En el modo Editar se deja el sistema estático, debido al uso de los TransformControls es más sencillo para la edición y el reposicionamiento de los objetos si se quedan quietos.
 
 ## Modo Educativo
 Es el modo predeterminado de la simulación, permite observar el sistema solar y sus elementos a través de las cámaras que se han creado. Esta animado con los movimientos de los planetas y sus lunas representados. 
