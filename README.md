@@ -6,14 +6,15 @@ Este proyecto consiste en una simulación 3D interactiva del Sistema Solar desar
 **ENLACE AL MODELO 3D**: [https://jjfqyg.csb.app/](https://jjfqyg.csb.app/)
 
 ## **Índice**   
-1. [Variables globales] (#id1)
-2. [Funciones para crear objetos] (#id2)
-3. [Controles de cámara] (#id3)
-4. [Loop] (#id4)
-5. [Modo Educativo] (#id5)
-6. [Modo Edición] (#id6]
-7. [Modo Realista] (#id7)
-8. [Vídeo] (#id8)
+1. [Variables globales](#variables-globales)  
+2. [Funciones para crear objetos](#funciones-para-crear-objetos)  
+3. [Controles de cámara](#controles-de-cámara)  
+4. [Loop](#loop)  
+5. [Modo Educativo](#modo-educativo)  
+6. [Modo Editar](#modo-editar)  
+7. [Modo Realista](#modo-realista)  
+8. [Vídeo](#vídeo)
+
 
 
 ## Variables globales <a name="id1"></a>
