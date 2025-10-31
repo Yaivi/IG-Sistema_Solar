@@ -65,3 +65,4 @@ Cuando se entra en este modo se desactivan los FlyControls para que no haya conf
 Este modo le añade una imagen al fondo de una galaxia.
 
 ## Vídeo
+https://drive.google.com/file/d/1qr1neP875OI61cWPNlff74TDCq02Kxy4/view?usp=sharing&t=5
